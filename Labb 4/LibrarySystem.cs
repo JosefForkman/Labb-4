@@ -20,7 +20,12 @@
 
         public bool AddBook(Book book)
         {
+            if (string.IsNullOrEmpty(book.ISBN))
+            {
+                return false; // ISBN is required
+            }
             books.Add(book);
+            
             return true;
         }
 
