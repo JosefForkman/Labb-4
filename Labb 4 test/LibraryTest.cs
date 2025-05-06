@@ -63,10 +63,22 @@ public sealed class LibraryTest
         var library = new LibrarySystem();
         var book = new Book("New Book", "New Author", "1234567899", 2023);
         library.AddBook(book);
-        library.BorrowBook(book.ISBN);
         // act
+        library.BorrowBook(book.ISBN);
         var result = library.RemoveBook(book.ISBN);
         // assert
         Assert.IsFalse(result);
+    }
+
+    [TestMethod]
+    public void SearchByISBN_CaseSensitiveSearchOnISBN_reternsFoundBook () {
+        // arrange
+        var library = new LibrarySystem();
+        var book = new Book("New Book", "New Author", "1234567899", 2023);
+        
+        // act
+        var result 
+
+        // assert
     }
 }

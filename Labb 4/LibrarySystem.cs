@@ -22,12 +22,7 @@ public class LibrarySystem
     {
         var existingBook = SearchByISBN(book.ISBN);
 
-        if (string.IsNullOrEmpty(book.ISBN))
-        {
-            return false;
-        }
-        
-        if (existingBook != null)
+        if (string.IsNullOrEmpty(book.ISBN) || existingBook != null)
         {
             return false;
         }
@@ -40,12 +35,12 @@ public class LibrarySystem
     public bool RemoveBook(string isbn)
     {
         Book book = SearchByISBN(isbn);
-        if (book != null)
+        if (book == null || book.IsBorrowed)
         {
-            books.Remove(book);
-            return true;
+            return false;
         }
-        return false;
+        books.Remove(book);
+        return true;
     }
 
     public Book SearchByISBN(string isbn)

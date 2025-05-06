@@ -25,3 +25,6 @@
 * Metod: RemoveBook
 * Rad: 40
 * Problem: Det går att ta bort en bok som är utlånad.
+* Lösning: Kontrollera att boken inte är utlånad med att använda propertyn `IsBorrowed` i klassen [Book](Labb%204/Book.cs#L9) innan boken tas bort. 
+
+## Systemet ska erbjuda flera sökfunktioner för att hitta böcker (ISBN, Titel eller författare)
