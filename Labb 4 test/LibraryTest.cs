@@ -71,14 +71,60 @@ public sealed class LibraryTest
     }
 
     [TestMethod]
-    public void SearchByISBN_CaseSensitiveSearchOnISBN_reternsFoundBook () {
+    [DataRow("1234567899")]
+    public void SearchByISBN_CaseSensitiveSearchOnISBN_reternsFoundBook(string ISBN)
+    {
         // arrange
         var library = new LibrarySystem();
-        var book = new Book("New Book", "New Author", "1234567899", 2023);
-        
+        var book = new Book("New Book", "New Author", ISBN, 2023);
+        library.AddBook(book);
+
         // act
-        var result 
+        var result = library.SearchByISBN(book.ISBN);
 
         // assert
+        Assert.IsNotNull(result);
+    }
+    [TestMethod]
+    [DataRow("New Book")] // Normal 
+    [DataRow("New book")] // First word has forst letter uppercase
+    [DataRow("new book")] // Lowercase
+    [DataRow("NEW BOOK")] // Uppercase
+    public void SearchByTitle_CaseSensitiveSearchOnTitle_reternsFoundBook(string title)
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var bookToCompereTo = new Book("New Book", "New Author", "1234567899", 2023);
+        var book = new Book(title, "New Author", "1234567899", 2023);
+        library.AddBook(bookToCompereTo);
+        library.AddBook(book);
+
+        // act
+        var bookToCompereToResult = library.SearchByTitle(bookToCompereTo.Title);
+        var result = library.SearchByTitle(book.Title);
+
+        // assert
+        CollectionAssert.AreEqual(bookToCompereToResult, result);
+    }
+    [TestMethod]
+    [DataRow("New Author")] // Normal 
+    [DataRow("New author")] // First word has forst letter uppercase
+    [DataRow("new author")] // Lowercase
+    [DataRow("NEW AUTHOR")] // Uppercase
+    public void SearchByAuthor_CaseSensitiveSearchOnAuther_reternsFoundBook(string auther)
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var bookToCompereTo = new Book("New Book", "New Author", "1234567899", 2023);
+        var book = new Book("New Book", auther, "1234567899", 2023);
+        library.AddBook(bookToCompereTo);
+        library.AddBook(book);
+
+        // act
+        var bookToCompereToResult = library.SearchByAuthor(bookToCompereTo.Author);
+        var result = library.SearchByAuthor(book.Author);
+
+        // assert
+        CollectionAssert.AreEqual(bookToCompereToResult, result);
     }
 }

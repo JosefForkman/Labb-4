@@ -50,7 +50,7 @@ public class LibrarySystem
 
     public List<Book> SearchByTitle(string title)
     {
-        return books.Where(b => b.Title == title).ToList();
+        return books.Where(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
     public List<Book> SearchByAuthor(string author)

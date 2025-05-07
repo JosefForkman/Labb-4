@@ -28,3 +28,9 @@
 * Lösning: Kontrollera att boken inte är utlånad med att använda propertyn `IsBorrowed` i klassen [Book](Labb%204/Book.cs#L9) innan boken tas bort. 
 
 ## Systemet ska erbjuda flera sökfunktioner för att hitta böcker (ISBN, Titel eller författare)
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs#L51)
+* Metod: SearchByISBN, SearchByTitle, SearchByAuthor
+* Rad: 46, 51, 56
+* Problem: Det gåt att söka efter böcker med ISBN-nummer och författare men inte med titel.
+* Lösning: Fixade så att det bryr sig om stor och liten bokstäver i sökningen. med hjälp av [string.Equals](Labb%204/LibrarySystem.cs#L46-47) och `StringComparison.OrdinalIgnoreCase` i metoden [SearchByTitle](Labb%204/LibrarySystem.cs#L51-54). 
+
