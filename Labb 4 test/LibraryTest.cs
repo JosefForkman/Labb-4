@@ -127,4 +127,24 @@ public sealed class LibraryTest
         // assert
         CollectionAssert.AreEqual(bookToCompereToResult, result);
     }
+    [TestMethod]
+    // [DataRow("9780060850550")]
+    [DataRow("550")]
+    // [DataRow("97800")]
+    public void SearchByISBN_PartialMatchesSearchOnISBN_reternsFoundBook(string ISBN)
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var bookToCompereTo = new Book("New Book", "New Author", "9780060850550", 2023);
+        var book = new Book("New Book", "New Author", ISBN, 2023);
+        library.AddBook(bookToCompereTo);
+        library.AddBook(book);
+
+        // act
+        var bookToCompereToResult = library.SearchByISBN(bookToCompereTo.ISBN);
+        var result = library.SearchByISBN(book.ISBN);
+
+        // assert
+        Assert.AreSame(bookToCompereToResult, result);
+    }
 }
