@@ -1,4 +1,6 @@
-﻿namespace Labb_4;
+﻿using System.Text.RegularExpressions;
+
+namespace Labb_4;
 
 public class LibrarySystem
 {
@@ -50,7 +52,7 @@ public class LibrarySystem
 
     public List<Book> SearchByTitle(string title)
     {
-        return books.Where(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase)).ToList();
+        return books.Where(b => b.Title.Contains(title, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
     public List<Book> SearchByAuthor(string author)
