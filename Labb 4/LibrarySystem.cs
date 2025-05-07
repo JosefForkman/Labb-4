@@ -45,9 +45,13 @@ public class LibrarySystem
         return true;
     }
 
-    public Book SearchByISBN(string isbn)
+    public Book? SearchByISBN(string isbn)
     {
-        return books.FirstOrDefault(b => b.ISBN == isbn);
+        if (isbn.Length <= 3)
+        {
+            return null;
+        }
+        return books.FirstOrDefault(book => book.ISBN.Contains(isbn, StringComparison.OrdinalIgnoreCase));
     }
 
     public List<Book> SearchByTitle(string title)
