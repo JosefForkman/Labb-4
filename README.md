@@ -34,3 +34,8 @@
 * Problem: Det gåt att söka efter böcker med ISBN-nummer och författare men inte med titel.
 * Lösning: Fixade så att det bryr sig om stor och liten bokstäver i sökningen. med hjälp av [string.Equals](Labb%204/LibrarySystem.cs#L46-47) och `StringComparison.OrdinalIgnoreCase` i metoden [SearchByTitle](Labb%204/LibrarySystem.cs#L51-54). 
 
+## Sökningar ska kunna hitta böcker på delmatchningar (inte bara exakta matchningar)
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs#L51)
+* Metod: SearchByISBN, SearchByTitle, SearchByAuthor
+* Rad: 48, 57, 62
+* Problem: Det går att söka efter böcker med ISBN-nummer, titel och författare

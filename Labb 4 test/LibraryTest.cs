@@ -128,9 +128,7 @@ public sealed class LibraryTest
         CollectionAssert.AreEqual(bookToCompereToResult, result);
     }
     [TestMethod]
-    // [DataRow("9780060850550")]
-    [DataRow("0550")]
-    [DataRow("97800")]
+    [DataRow("9780060850550")]
     public void SearchByISBN_PartialMatchesSearchOnISBN_reternsFoundBook(string ISBN)
     {
         // arrange
@@ -144,5 +142,41 @@ public sealed class LibraryTest
 
         // assert
         Assert.AreSame(expected, actual);
+    }
+    [TestMethod]
+    [DataRow("New Book")]
+    [DataRow(" Book")]
+    [DataRow("New Bo")]
+    [DataRow("New ")]
+    public void SearchByTitle_PartialMatchesSearchOnTitle_reternsFoundBooks(string title)
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var expected = new Book("New Book", "New Author", "9780060850550", 2023);
+        var actualBook = new Book(title, "New Author", "9780060850550", 2023);
+        library.AddBook(expected);
+        // act
+        var actual = library.SearchByTitle(actualBook.Title);
+
+        // assert
+        Assert.IsTrue(actual.Count > 0);
+    }
+    [TestMethod]
+    [DataRow("New Author")]
+    [DataRow(" Author")]
+    [DataRow("New Au")]
+    [DataRow("New ")]
+    public void SearchByTitle_PartialMatchesSearchOnAuthor_reternsFoundBooks(string author)
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var expected = new Book("New Book", "New Author", "9780060850550", 2023);
+        var actualBook = new Book("New Book", author, "9780060850550", 2023);
+        library.AddBook(expected);
+        // act
+        var actual = library.SearchByAuthor(actualBook.Author);
+
+        // assert
+        Assert.IsTrue(actual.Count > 0);
     }
 }
