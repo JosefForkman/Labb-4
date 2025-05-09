@@ -38,4 +38,5 @@
 * Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs#L51)
 * Metod: SearchByISBN, SearchByTitle, SearchByAuthor
 * Rad: 48, 57, 62
-* Problem: Det går att söka efter böcker med ISBN-nummer, titel och författare
+* Problem: Det går att söka efter böcker med titel och författare. ISBN-nummer kunde inte sökas med delmatchningar.
+* Lösning: Fixade la till en extra metod som heter [SearchByISBNMany](Labb%204/LibrarySystem.cs#L57) som söker efter ISBN-nummer med delmatchningar. Den returnerar en lista med böcker som matchar ISBN-numret.  

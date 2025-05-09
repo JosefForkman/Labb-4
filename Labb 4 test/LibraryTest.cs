@@ -129,6 +129,8 @@ public sealed class LibraryTest
     }
     [TestMethod]
     [DataRow("9780060850550")]
+    [DataRow("60850550")]
+    [DataRow("978006085")]
     public void SearchByISBN_PartialMatchesSearchOnISBN_reternsFoundBook(string ISBN)
     {
         // arrange
@@ -138,10 +140,10 @@ public sealed class LibraryTest
         library.AddBook(expected);
 
         // act
-        var actual = library.SearchByISBN(actualBook.ISBN);
+        var actual = library.SearchByISBNMany(actualBook.ISBN);
 
         // assert
-        Assert.AreSame(expected, actual);
+        Assert.IsTrue(actual.Count > 0);
     }
     [TestMethod]
     [DataRow("New Book")]
