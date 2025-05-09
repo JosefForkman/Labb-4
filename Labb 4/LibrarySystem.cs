@@ -71,7 +71,7 @@ public class LibrarySystem
 
     public bool BorrowBook(string isbn)
     {
-        Book book = SearchByISBN(isbn);
+        Book? book = SearchByISBN(isbn);
         if (book != null && !book.IsBorrowed)
         {
             book.IsBorrowed = true;

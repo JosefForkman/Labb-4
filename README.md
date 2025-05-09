@@ -40,3 +40,22 @@
 * Rad: 48, 57, 62
 * Problem: Det går att söka efter böcker med titel och författare. ISBN-nummer kunde inte sökas med delmatchningar.
 * Lösning: Fixade la till en extra metod som heter [SearchByISBNMany](Labb%204/LibrarySystem.cs#L57) som söker efter ISBN-nummer med delmatchningar. Den returnerar en lista med böcker som matchar ISBN-numret.  
+
+
+## En bok som lånas ut ska markeras som utlånad i systemet
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: BorrowBook
+* Rad: 72
+* Problem: Det går att låna ut en bok och att den returnerar en bok med propertyn `IsBorrowed` och får ett låningsdatum.
+
+## Redan utlånade böcker ska inte kunna lånas ut
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: BorrowBook
+* Rad: 72
+* Problem: Det finns inga problem med att låna ut en bok som är utlånad.
+
+## När en bok lånas ska rätt utlåningsdatum sättas
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: BorrowBook
+* Rad: 72
+* Problem: Det finns inga problem med att sätta rätt utlåningsdatum när en bok lånas ut.
