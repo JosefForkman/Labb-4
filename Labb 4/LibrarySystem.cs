@@ -51,7 +51,12 @@ public class LibrarySystem
         {
             return null;
         }
-        return books.FirstOrDefault(book => book.ISBN.Contains(isbn, StringComparison.OrdinalIgnoreCase));
+        return books.FirstOrDefault(book => book.ISBN.Equals(isbn, StringComparison.OrdinalIgnoreCase));
+    }
+
+    public List<Book> SearchByISBNMany(string isbn)
+    {
+        return books.Where(book => book.ISBN.Contains(isbn, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
     public List<Book> SearchByTitle(string title)
