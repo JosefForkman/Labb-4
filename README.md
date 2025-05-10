@@ -59,3 +59,5 @@
 * Metod: BorrowBook
 * Rad: 72
 * Problem: Det finns inga problem med att sätta rätt utlåningsdatum när en bok lånas ut.
+
+##  Vid återlämning ska bokens utlåningsdatum nollställas

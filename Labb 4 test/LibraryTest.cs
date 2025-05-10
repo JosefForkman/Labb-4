@@ -227,6 +227,22 @@ public sealed class LibraryTest
         var expected = DateTime.Now;
 
         // assert
-        Assert.IsTrue(expected.CompareTo(actual.BorrowDate) >= 0); 
+        Assert.IsTrue(expected.CompareTo(actual.BorrowDate) >= 0);
+    }
+
+    [TestMethod]
+    public void ReturnBook_BorrowBookGetRest_True()
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var book = new Book("New Book", "New Author", "9780060850550", 2023);
+        library.AddBook(book);
+        library.BorrowBook(book.ISBN);
+
+        // act
+        var actual = library.ReturnBook(book.ISBN);
+
+        // assert 
+        Assert.IsTrue(actual);
     }
 }
