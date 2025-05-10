@@ -83,13 +83,17 @@ public class LibrarySystem
 
     public bool ReturnBook(string isbn)
     {
-        Book book = SearchByISBN(isbn);
-        if (book != null && book.IsBorrowed)
+        Book? book = SearchByISBN(isbn);
+        
+        if (book == null || !book.IsBorrowed)
         {
-            book.IsBorrowed = false;
-            return true;
+            return false;
         }
-        return false;
+
+        book.IsBorrowed = false;
+        book.BorrowDate = null;
+
+        return true;
     }
 
     public List<Book> GetAllBooks()

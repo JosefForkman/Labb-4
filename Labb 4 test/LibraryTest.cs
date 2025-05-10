@@ -240,9 +240,28 @@ public sealed class LibraryTest
         library.BorrowBook(book.ISBN);
 
         // act
-        var actual = library.ReturnBook(book.ISBN);
+        library.ReturnBook(book.ISBN);
+        var actual = library.SearchByISBN(book.ISBN);
+        var expected = false;
 
         // assert 
+        Assert.IsTrue(actual.IsBorrowed == expected);
+        Assert.IsNull(actual.BorrowDate);
+    }
+
+    [TestMethod]
+    public void ReturnBook_BorrowBookBeReturned_True()
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var book = new Book("New Book", "New Author", "9780060850550", 2023);
+        library.AddBook(book);
+        library.BorrowBook(book.ISBN);
+
+        // act
+        var actual = library.ReturnBook(book.ISBN);
+
+        // assert
         Assert.IsTrue(actual);
     }
 }

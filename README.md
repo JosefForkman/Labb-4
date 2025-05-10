@@ -61,3 +61,13 @@
 * Problem: Det finns inga problem med att sätta rätt utlåningsdatum när en bok lånas ut.
 
 ##  Vid återlämning ska bokens utlåningsdatum nollställas
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: ReturnBook
+* Rad: 84
+* Problem: BorrowDate sätts inte till null när boken återlämnas.
+* Lösning: Sätt `BorrowDate` till null när boken återlämnas i metoden [ReturnBook](Labb%204/LibrarySystem.cs#L84-97).
+
+## Endast utlånade böcker ska kunna återlämnas
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: ReturnBook
+* Rad: 84
