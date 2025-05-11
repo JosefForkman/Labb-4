@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace Labb_4;
 
@@ -23,8 +24,11 @@ public class LibrarySystem
     public bool AddBook(Book book)
     {
         var existingBook = SearchByISBN(book.ISBN);
-
-        if (string.IsNullOrEmpty(book.ISBN) || existingBook != null)
+        
+        var results = new List<ValidationResult>();
+        var isValidBook = Validator.TryValidateObject(book, new ValidationContext(book), results, true);
+        
+        if (!isValidBook || existingBook != null)
         {
             return false;
         }
@@ -36,7 +40,7 @@ public class LibrarySystem
 
     public bool RemoveBook(string isbn)
     {
-        Book book = SearchByISBN(isbn);
+        Book? book = SearchByISBN(isbn);
         if (book == null || book.IsBorrowed)
         {
             return false;
@@ -47,10 +51,6 @@ public class LibrarySystem
 
     public Book? SearchByISBN(string isbn)
     {
-        if (isbn.Length <= 3)
-        {
-            return null;
-        }
         return books.FirstOrDefault(book => book.ISBN.Equals(isbn, StringComparison.OrdinalIgnoreCase));
     }
 

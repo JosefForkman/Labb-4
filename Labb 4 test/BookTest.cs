@@ -6,11 +6,25 @@ namespace Labb_4_test;
 public sealed class BookTest
 {
     [TestMethod]
+    public void GetAllBooks_BooksInLibrary_ReturnsAllBooks()
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var book1 = new Book("New Book", "New Author", "9780060850550", 2023);
+        var book2 = new Book("Another Book", "Another Author", "9780060850551", 2023);
+        library.AddBook(book1);
+        library.AddBook(book2);
+        // act
+        var result = library.GetAllBooks();
+        // assert
+        Assert.IsTrue(result.Count > 0, "Failed to retrieve books from the library.");
+    }
+    [TestMethod]
     public void AddBook_AddNewBookToLibrary_unikBook()
     {
         // arrange
         var library = new LibrarySystem();
-        var book = new Book("New Book", "New Author", "1234567890", 2023);
+        var book = new Book("New Book", "New Author", "9780060850550", 2023);
         // act
         var result = library.AddBook(book);
         // assert
@@ -23,7 +37,6 @@ public sealed class BookTest
         // arrange
         var library = new LibrarySystem();
         var book = new Book("New Book", "New Author", "", 2023);
-        library.AddBook(book);
         // act
         var result = library.AddBook(book);
         // assert
@@ -34,8 +47,8 @@ public sealed class BookTest
     {
         // arrange
         var library = new LibrarySystem();
-        var book1 = new Book("New Book", "New Author", "1234567890", 2023);
-        var book2 = new Book("Another Book", "Another Author", "1234567890", 2023);
+        var book1 = new Book("New Book", "New Author", "9780060850550", 2023);
+        var book2 = new Book("Another Book", "Another Author", "9780060850550", 2023);
         // act
         library.AddBook(book1);
         var result = library.AddBook(book2);
@@ -43,6 +56,17 @@ public sealed class BookTest
         Assert.IsFalse(result, "Failed to prevent adding a book with an existing ISBN.");
     }
 
+    [TestMethod]
+    public void AddBook_BookHaveNoDate_False()
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var book = new Book("New Book", "New Author", "9780060850550", 0);
+        // act
+        var result = library.AddBook(book);
+        // assert
+        Assert.IsFalse(result, "Failed to prevent adding a book with an invalid date.");
+    }
     [TestMethod]
     public void RemoveBook_bookShouldBeAbleToRemove_reternTrue()
     {
@@ -61,7 +85,7 @@ public sealed class BookTest
     {
         // arrange
         var library = new LibrarySystem();
-        var book = new Book("New Book", "New Author", "1234567899", 2023);
+        var book = new Book("New Book", "New Author", "9780060850555", 2023);
         library.AddBook(book);
         // act
         library.BorrowBook(book.ISBN);
