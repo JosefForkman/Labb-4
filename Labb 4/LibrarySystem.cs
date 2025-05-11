@@ -84,7 +84,7 @@ public class LibrarySystem
     public bool ReturnBook(string isbn)
     {
         Book? book = SearchByISBN(isbn);
-        
+
         if (book == null || !book.IsBorrowed)
         {
             return false;
@@ -101,27 +101,50 @@ public class LibrarySystem
         return books;
     }
 
+/// <summary>
+/// Calculates the late fee for a book based on the number of days late.
+/// </summary>
+/// <param name="isbn"></param>
+/// <param name="daysLate"></param>
+/// <returns>
+/// If the book is not found, returns -1.
+/// </returns>
     public decimal CalculateLateFee(string isbn, int daysLate)
     {
-        if (daysLate <= 0)
-            return 0;
-
-        Book book = SearchByISBN(isbn);
+        Book? book = SearchByISBN(isbn);
         if (book == null)
+        {
+            return -1;
+        }
+
+        if (daysLate <= 0)
+        {
             return 0;
+        }
 
         decimal feePerDay = 0.5m;
-        return daysLate + feePerDay;
+        return daysLate * feePerDay;
     }
 
+    /// <summary>
+    /// Checks if a book is overdue based on the loan period.
+    /// </summary>
+    /// <param name="isbn"></param>
+    /// <param name="loanPeriodDays"></param>
+    /// <returns>
+    /// If the book is overdue returns true, otherwise false.
+    /// </returns>
     public bool IsBookOverdue(string isbn, int loanPeriodDays)
     {
-        Book book = SearchByISBN(isbn);
-        if (book != null && book.IsBorrowed && book.BorrowDate.HasValue)
+        Book? book = SearchByISBN(isbn);
+
+        if (book == null || !book.IsBorrowed || book.BorrowDate == null)
         {
-            TimeSpan borrowedFor = DateTime.Now - book.BorrowDate.Value;
-            return borrowedFor.Days > loanPeriodDays;
+            return false;
         }
-        return false;
+
+        double borrowedFor = (DateTime.Now - book.BorrowDate.Value).Days;
+
+        return borrowedFor > loanPeriodDays;
     }
 }

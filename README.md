@@ -72,4 +72,16 @@
 * Metod: ReturnBook
 * Rad: 84
 * Problem: Det finns inga problem
- 
+
+## Korrekt beräkning av om en bok är försenad ska implementeras
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: IsBookOverdue
+* Rad: 119
+* Problem: Det finns inga problem med att beräkna om en bok är försenad.
+
+## Förseningsavgifter ska beräknas enligt specificerad formel (förseningsavgift * antal dagar försenad)
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: CalculateOverdueFee
+* Rad: 112
+* Problem: använder sig av addering istället för multiplikation.
+* Lösning: Använd multiplikation istället för addering i metoden `CalculateOverdueFee` för att beräkna förseningsavgiften.
