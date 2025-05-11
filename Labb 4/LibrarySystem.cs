@@ -27,8 +27,10 @@ public class LibrarySystem
         
         var results = new List<ValidationResult>();
         var isValidBook = Validator.TryValidateObject(book, new ValidationContext(book), results, true);
-        
-        if (!isValidBook || existingBook != null)
+        if (!isValidBook) {
+            return false;
+        }
+        if (existingBook != null)
         {
             return false;
         }
