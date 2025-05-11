@@ -88,7 +88,7 @@ public sealed class BookTest
     {
         // arrange
         var library = new LibrarySystem();
-        var book = new Book("New Book", "New Author", "1234567899", 2023);
+        var book = new Book("New Book", "New Author", "9780060850555", 2023);
         library.AddBook(book);
         // act
         var result = library.RemoveBook(book.ISBN);
