@@ -10,9 +10,7 @@ public class Book
     [Required(ErrorMessage = "Author is required.")]
     [RegularExpression(@"^[a-zA-Z\s.]+$", ErrorMessage = "Author name can only contain letters, dots and spaces.")]
     public string Author { get; set; }
-    [Required(ErrorMessage = "ISBN is required.")]
-    [MinLength(10, ErrorMessage = "ISBN must be at least 10 characters long.")]
-    [MaxLength(13, ErrorMessage = "ISBN must be at most 13 characters long.")]
+    [RegularExpression(@"^\d{10,13}$", ErrorMessage = "ISBN must be 10 or 13 digits long.")]
     public string ISBN { get; set; }
     [Range(1000, 9999, ErrorMessage = "Publication year must be between 1000 and 9999.")]
     public int PublicationYear { get; set; }

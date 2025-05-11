@@ -57,6 +57,22 @@ public sealed class BookTest
     }
 
     [TestMethod]
+    [DataRow("97800608505501")] // 1 digit too long
+    [DataRow("978006085")] // 1 digit too short
+    [DataRow("97800608505501a")] // contains a letter
+    [DataRow("97800608505501!")] // contains a special character (!)
+    [DataRow("97800608505501-")] // contains a special character (-)
+    public void AddBook_AddBookIncorrectLength_ISBN_Book(string isbn)
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var book = new Book("New Book", "New Author", isbn, 2023);
+        // act
+        var result = library.AddBook(book);
+        // assert
+        Assert.IsFalse(result, "Failed to prevent adding a book with an incorrect ISBN length.");
+    }
+    [TestMethod]
     public void AddBook_BookHaveNoDate_False()
     {
         // arrange
