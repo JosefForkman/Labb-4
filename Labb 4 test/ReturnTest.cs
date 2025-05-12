@@ -41,4 +41,20 @@ public class ReturnTest
         // assert
         Assert.IsTrue(actual);
     }
+
+    [TestMethod]
+    public void ReturnBook_BookNotInLibrary_False()
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var book = new Book("New Book", "New Author", "9780060850550", 2023);
+        library.AddBook(book);
+        library.BorrowBook(book.ISBN);
+
+        // act
+        var actual = library.ReturnBook("9780060850551");
+
+        // assert
+        Assert.IsFalse(actual);
+    }
 }

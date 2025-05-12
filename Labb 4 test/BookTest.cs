@@ -110,4 +110,17 @@ public sealed class BookTest
         Assert.IsFalse(result);
     }
 
+    [TestMethod]
+    public void RemoveBook_bookThatDoesNotExist_reternFalse()
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var book = new Book("New Book", "New Author", "9780060850555", 2023);
+        library.AddBook(book);
+        // act
+        var result = library.RemoveBook("9780060850556");
+        // assert
+        Assert.IsFalse(result, "Failed to prevent removing a book that does not exist.");
+    }
+
 }

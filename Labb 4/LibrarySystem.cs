@@ -54,7 +54,7 @@ public class LibrarySystem
     public Book? SearchByISBN(string isbn)
     {
         var regex = new Regex(@"^\d{10,13}$");
-        if (!regex.IsMatch(isbn) && string.IsNullOrEmpty(isbn))
+        if (!regex.IsMatch(isbn) || string.IsNullOrEmpty(isbn))
         {
             return null;
         }

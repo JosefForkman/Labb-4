@@ -21,6 +21,26 @@ public class SearchTest
         Assert.IsNotNull(result);
     }
     [TestMethod]
+    [DataRow("9780060850550")] // 13 digits
+    [DataRow("97800608505501")] // 14 digits
+    [DataRow("978006085")] // 9 digits
+    [DataRow("978006085055+")] // 12 digits and a +
+    [DataRow("978006085055!")] // 12 digits and a !
+    [DataRow("978006085055a")] // 12 digits and a letter
+    [DataRow("")]
+    public void SearchByISBN_IsNotValidISBN_ReturnsNull(string isbn)
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var book = new Book("New Book", "New Author", isbn, 2023);
+
+        // act
+        var result = library.SearchByISBN(book.ISBN);
+
+        // assert
+        Assert.IsNull(result);
+    }
+    [TestMethod]
     [DataRow("New Book")] // Normal 
     [DataRow("New book")] // First word has forst letter uppercase
     [DataRow("new book")] // Lowercase

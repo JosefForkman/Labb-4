@@ -53,4 +53,16 @@ public class BorrowTest
         Assert.IsTrue(expected.CompareTo(actual.BorrowDate) >= 0);
     }
 
+    [TestMethod]
+    public void BorrowBook_BookNotInLibrary_False()
+    {
+        // arrange
+        var library = new LibrarySystem();
+        var book = new Book("New Book", "New Author", "9780060850550", 2023);
+        // act
+        var actual = library.BorrowBook(book.ISBN);
+
+        // assert
+        Assert.IsFalse(actual);
+    }
 }

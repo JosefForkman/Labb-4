@@ -25,7 +25,13 @@
 * Metod: RemoveBook
 * Rad: 40
 * Problem: Det går att ta bort en bok som är utlånad.
-* Lösning: Kontrollera att boken inte är utlånad med att använda propertyn `IsBorrowed` i klassen [Book](Labb%204/Book.cs#L9) innan boken tas bort. 
+* Lösning: Kontrollera att boken inte är utlånad med att använda propertyn `IsBorrowed` i klassen [Book](Labb%204/Book.cs#L9) innan boken tas bort.
+
+## Böcker ska inte kunna tas bort om de inte finns i systemet
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs#)
+* Metod: RemoveBook
+* Rad: 43
+* Problem: Det finns inga problem med att ta bort en bok som inte finns i systemet.
 
 ## Systemet ska erbjuda flera sökfunktioner för att hitta böcker (ISBN, Titel eller författare)
 * Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs#L51)
@@ -41,6 +47,12 @@
 * Problem: Det går att söka efter böcker med titel och författare. ISBN-nummer kunde inte sökas med delmatchningar.
 * Lösning: Fixade la till en extra metod som heter [SearchByISBNMany](Labb%204/LibrarySystem.cs#L57) som söker efter ISBN-nummer med delmatchningar. Den returnerar en lista med böcker som matchar ISBN-numret.  
 
+## System ska inte kunna söka efter bökers ISBN-nummer som inta är mellan 10 och 13 tecken och inte några specialtecken
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: SearchByISBN
+* Rad: 54
+* Problem: Det går att söka efter böcker med ISBN-nummer som inte är mellan 10 och 13 tecken och som innehåller specialtecken.
+* Lösning: Kontrollera att ISBN-nummer är mellan 10 och 13 tecken och inte innehåller några specialtecken innan sökningen görs. Använd [Regex](Labb%204/LibrarySystem.cs#L56-60) för att kontrollera att ISBN-nummer är giltigt.
 
 ## En bok som lånas ut ska markeras som utlånad i systemet
 * Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
@@ -59,6 +71,13 @@
 * Metod: BorrowBook
 * Rad: 72
 * Problem: Det finns inga problem med att sätta rätt utlåningsdatum när en bok lånas ut.
+
+## Bok som inte finns i systemet ska inte kunna lånas ut
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: BorrowBook
+* Rad: 79
+* Problem: Finns inga problem med att låna ut en bok som inte finns i systemet.
+
 
 ##  Vid återlämning ska bokens utlåningsdatum nollställas
 * Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
@@ -79,9 +98,22 @@
 * Rad: 119
 * Problem: Det finns inga problem med att beräkna om en bok är försenad.
 
+## Book med incorrekt ISBN-nummer ska inte kunna få en förseningsavgift
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: CalculateOverdueFee
+* Rad: 114
+* Problem: Felhandtering finns redan.
+
+
 ## Förseningsavgifter ska beräknas enligt specificerad formel (förseningsavgift * antal dagar försenad)
 * Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
 * Metod: CalculateOverdueFee
-* Rad: 112
+* Rad: 119
 * Problem: använder sig av addering istället för multiplikation.
 * Lösning: Använd multiplikation istället för addering i metoden `CalculateOverdueFee` för att beräkna förseningsavgiften.
+
+## Koll om en bok är försenad med incorrect ISBN-nummer ska inte kunna göras
+* Filnamn: [LibrarySystem](Labb%204/LibrarySystem.cs)
+* Metod: IsBookOverdue
+* Rad: 144
+* Problem: Incorrect ISBN-nummer har felhantering.
